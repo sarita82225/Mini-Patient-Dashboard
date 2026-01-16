@@ -1,0 +1,67 @@
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f5f6f8;
+}
+
+/* Container for pages */
+.container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 16px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Page titles */
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+/* Lists */
+.list {
+  list-style: none;
+  padding: 0;
+}
+
+.list-item {
+  border: 1px solid #ddd;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.list-item:hover {
+  background-color: #f0f0f0;
+}
+
+/* Links */
+.link {
+  color: #2563eb;
+  text-decoration: none;
+  margin-bottom: 16px;
+  display: inline-block;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+/* Subtext (age, date) */
+.subtext {
+  font-size: 14px;
+  color: #666;
+  margin-top: 4px;
+}
+
+/* Loading state */
+.loading {
+  padding: 16px;
+  text-align: center;
+  color: #333;
+}
