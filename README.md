@@ -1,4 +1,4 @@
-# 🦷 Dentist Patients App
+ Dentist Patients App
 
 A minimal **Next.js + RTK Query + TypeScript** web application where a dentist can:
 - View a list of patients
@@ -9,7 +9,7 @@ UI is built with **plain CSS**, no Tailwind or UI frameworks.
 
 ---
 
-## 🚀 Tech Stack
+Tech Stack
 
   - Next.js (Pages Router)
   - React + TypeScript
@@ -18,7 +18,7 @@ UI is built with **plain CSS**, no Tailwind or UI frameworks.
 
 ---
 
-## 📦 Prerequisites
+Prerequisites
 
 - Node.js 18+ (LTS recommended)  
   Download: [https://nodejs.org](https://nodejs.org)
@@ -30,19 +30,18 @@ node -v
 npm -v
 
 ---
+Installation (Step by Step)
 
-🛠️ Installation (Step by Step)
-
- 1️⃣ Create Next.js project
+ 1️ Create Next.js project
     npx create-next-app@latest dentist-app --typescript
 
- 2️⃣ Move into project
+ 2️ Move into project
     cd dentist-app
 
- 3️⃣ Install required dependencies
+ 3️Install required dependencies
     npm install @reduxjs/toolkit react-redux
 
- 4️⃣ Folder Structure
+ 4️Folder Structure
   src/
    ├── pages/
    │    ├── api/
@@ -58,7 +57,7 @@ npm -v
    └── styles/
       └── globals.css
 
- 5️⃣ API Endpoints
+ 5️API Endpoints
     GET /api/patients
 
     Returns a list of patients.
@@ -81,7 +80,7 @@ npm -v
       { "id": 2, "type": "Filling", "date": "2024-03-05" }
    ]
 
-6️⃣ Frontend Pages
+6️ Frontend Pages
 
   /patients → List of patients
 
@@ -89,20 +88,20 @@ npm -v
 
   Uses RTK Query for data fetching
 
-7️⃣ Plain CSS for styling
+7️ Plain CSS for styling
 
     File: src/styles/globals.css
 
-8️⃣ Redux Store Setup
+8️ Redux Store Setup
 
   store/api.ts
   store/store.ts
 
-9️⃣ _app.tsx Setup
+9️ _app.tsx Setup
 
 
 
-🔧 Running the App
+ Running the App
    npm run dev
 
 Open in browser:
@@ -120,7 +119,7 @@ Click a patient → http://localhost:3000/patients/1
   - http://localhost:3000/api/patients/1/treatments
 
 
-✅ Key Points
+Key Points
 
   - No Tailwind, plain CSS used
 
@@ -133,7 +132,7 @@ Click a patient → http://localhost:3000/patients/1
   - Folder [id]/treatments.ts is critical for dynamic routes
 
 
-🔮 Possible Enhancements
+Possible Enhancements
 
   - Add CRUD functionality for treatments
 
