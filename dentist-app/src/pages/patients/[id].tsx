@@ -24,7 +24,6 @@ export default function TreatmentsPage() {
         if ((typeFilter && t.type !== typeFilter) || ((dateFilter && normalizeDate(t.date) !== dateFilter))) return false
         return true
     })
-    console.log("Filtered Treatments:", filteredTreatments)
 
     if (isLoading) return <p className="p-4">Loading...</p>
 
@@ -69,11 +68,11 @@ export default function TreatmentsPage() {
             {filteredTreatments?.length === 0 && <p>No treatments found..</p>}
             <div className="table-container">
                 <table style={{ width: "100%", borderCollapse: "collapse", border: "1px solid #ccc" }}>
-                    <thead style={{ backgroundColor: "#f5f5f5" }}>
+                    <thead style={{ backgroundColor: "#f5f5f5",color:"blue",borderBottom: "1px solid #ccc"  }}>
                         <tr>
-                            <th><strong>Ttype</strong></th>
-                            <th><strong>Tdate</strong></th>
-                            <th><strong>Tcost</strong></th>
+                            <th><strong>T_type</strong></th>
+                            <th><strong>T_date</strong></th>
+                            <th><strong>T_cost</strong></th>
                         </tr>
                     </thead>
                     <tbody style={{ textAlign: "center" }}>
