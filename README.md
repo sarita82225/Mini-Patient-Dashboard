@@ -3,8 +3,9 @@
 A minimal **Next.js + RTK Query + TypeScript** web application where a dentist can:
 - View a list of patients
 - Click on a patient to see their treatment history
+- Filter functionality (treatment type and treatmate date base)
 
-Data is **mocked and stored in memory** using Next.js API routes.  
+Data is mocked and stored in memory using Next.js API routes.  
 UI is built with **plain CSS**, no Tailwind or UI frameworks.
 
 ---
@@ -43,42 +44,29 @@ Installation (Step by Step)
 
  4️Folder Structure
   src/
-   ├── pages/
-   │    ├── api/
-   │    │    ├── patients.ts
-   │    │    └── patients/[id]/treatments.ts
-   │    ├── patients/
-   │    │    ├── index.tsx
-   │    │    └── [id].tsx
-   │    └── _app.tsx
-   ├── store/
-   │    ├── api.ts
-   │    └── store.ts
-   └── styles/
-      └── globals.css
+   |- pages/
+   |    ├-- api/
+   |    │    |---patients.ts
+   |    │    |---patients/[id]/treatments.ts
+   |    ├---patients/
+   |    │    |-- index.tsx
+   |    │    |-- [id].tsx
+   |    └-- _app.tsx
+   |--- store/
+   |    |--- api.ts
+   |    |---store.ts
+   |---styles/
+       |─-- globals.css
 
  5️API Endpoints
     GET /api/patients
 
     Returns a list of patients.
 
-    Example response:
-
-    [
-     { "id": "1", "name": "John Doe", "age": 32 },
-      { "id": "2", "name": "Maria Rossi", "age": 28 }
-   ]
-
    GET /api/patients/:id/treatments
 
    Returns treatment history for a patient.
-
-   Example response:
-
-   [
-      { "id": 1, "type": "Cleaning", "date": "2024-01-10" },
-      { "id": 2, "type": "Filling", "date": "2024-03-05" }
-   ]
+   
 
 6️ Frontend Pages
 
@@ -104,10 +92,11 @@ Installation (Step by Step)
  Running the App
    npm run dev
 
-Open in browser:
+Open in browser
 
  http://localhost:3000/patients
    → Patients list
+
 
 Click a patient → http://localhost:3000/patients/1
    → Treatment history
@@ -117,6 +106,9 @@ Click a patient → http://localhost:3000/patients/1
   - http://localhost:3000/api/patients
 
   - http://localhost:3000/api/patients/1/treatments
+
+Output screens
+
 
 
 Key Points
