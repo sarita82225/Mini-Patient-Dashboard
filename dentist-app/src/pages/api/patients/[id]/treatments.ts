@@ -1,15 +1,20 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { patients } from "../../data"
 
-const treatments: Record<string, any[]> = {
-  '1': [
-    { id: 1, type: 'Cleaning', date: '2024-01-10' },
-    { id: 2, type: 'Filling', date: '2024-03-05' },
-  ],
-  '2': [{ id: 1, type: 'Whitening', date: '2024-02-20' }],
-  '3': [{ id: 1, type: 'Root Canal', date: '2024-01-15' }],
-}
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const { id } = req.query
-  res.status(200).json(treatments[id as string] || [])
+  {
+        const patient = patients.find((p)=> p.id === id);
+        if(!patient) {
+            return res.status(404).json({ message: "patients not found"})
+
+        } else {
+            if(req.method === 'GET') {
+                return res.status(200).json(patient.treatments)
+            }
+        }
+           
+    }
 }
+        
