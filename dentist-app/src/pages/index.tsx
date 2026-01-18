@@ -1,18 +1,14 @@
 
 import styles from "@/styles/Home.module.css";
-import { GetServerSideProps } from 'next'
+import DashboardLayout from "../components/dashboard";
 
-export default function Home() {
-  return null
+export default function HomePage() {
+  return <DashboardLayout />;
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  return {
-    redirect: {
-      destination: '/patients',
-      permanent: false, 
-    },
-  }
-}
+
+
+
+
 
 
