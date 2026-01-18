@@ -31,7 +31,7 @@ export default function TreatmentsPage() {
 
     return (
         <div className="p-6 max-w-xl mx-auto">
-            <Link href="/patients" className="text-blue-500">Back</Link>
+            <Link href="/" className="text-blue-500">Back</Link>
             <h1 className="text-2xl font-bold my-4">Treatment History</h1>
 
             {/* Filter Section */}
