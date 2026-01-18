@@ -41,6 +41,7 @@ Installation (Step by Step)
 
  3️Install required dependencies
     npm install @reduxjs/toolkit react-redux
+    npm install antd --save
 
  4️Folder Structure
   src/
