@@ -1,6 +1,7 @@
 import type { AppProps } from 'next/app';
 import { Provider } from 'react-redux';
 import { store } from '@/store/store';
+import 'antd/dist/reset.css';
 import '@/styles/globals.css'
 
 
