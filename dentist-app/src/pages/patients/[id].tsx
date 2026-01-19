@@ -12,8 +12,8 @@ export default function TreatmentsPage() {
   const router = useRouter()
   const { id } = router.query
 
-  const [typeFilter, setTypeFilter] = useState<string>()
-  const [dateFilter, setDateFilter] = useState<string>()
+  const [typeFilter, setTypeFilter] = useState<string | null>(null)
+  const [dateFilter, setDateFilter] =  useState<string | null>(null)
 
   const { data = [], isLoading } = useGetTreatmentsQuery(id as string, {
     skip: !id,
@@ -79,8 +79,8 @@ export default function TreatmentsPage() {
 
           <Button
             onClick={() => {
-              setTypeFilter("")
-              setDateFilter("")
+              setTypeFilter(null)
+              setDateFilter(null)
             }}
           >
             Clear Filters
