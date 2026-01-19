@@ -1,93 +1,114 @@
-'use client'
+ 'use client'
 import { useRouter } from 'next/router'
 import { useGetTreatmentsQuery } from '@/store/api'
 import Link from 'next/link'
 import { useState } from 'react'
+import { Table, Select, DatePicker, Button, Card, Typography, Spin, Empty, Space } from 'antd'
+import dayjs from 'dayjs'
 
+const { Title } = Typography
 
 export default function TreatmentsPage() {
-    const router = useRouter()
-    const { id } = router.query
+  const router = useRouter()
+  const { id } = router.query
 
-    const [typeFilter, setTypeFilter] = useState('')
-    const [dateFilter, setDateFilter] = useState('')
+  const [typeFilter, setTypeFilter] = useState<string>()
+  const [dateFilter, setDateFilter] = useState<string>()
 
+  const { data = [], isLoading } = useGetTreatmentsQuery(id as string, {
+    skip: !id,
+  })
 
+  const normalizeDate = (date: string) => dayjs(date).format('YYYY-MM-DD')
 
-    const { data, isLoading } = useGetTreatmentsQuery(id as string, {
-        skip: !id,
-    })
+  const filteredTreatments = data.filter((t) => {
+    if (typeFilter && t.type !== typeFilter) return false
+    if (dateFilter && normalizeDate(t.date) !== dateFilter) return false
+    return true
+  })
 
-    const normalizeDate = (date: string) =>
-    new Date(date).toISOString().split('T')[0]
+  const columns = [
+    {
+      title: 'Treatment Type',
+      dataIndex: 'type',
+      key: 'type',
+    },
+    {
+      title: 'Date',
+      dataIndex: 'date',
+      key: 'date',
+      render: (date: string) => dayjs(date).format('DD MMM YYYY'),
+    },
+    {
+      title: 'Cost (€)',
+      dataIndex: 'cost',
+      key: 'cost',
+      render: (cost: number) => `€ ${cost}`,
+    },
+  ]
 
-    const filteredTreatments = (data || []).filter((t) => {
-        if ((typeFilter && t.type !== typeFilter) || ((dateFilter && normalizeDate(t.date) !== dateFilter))) return false
-        return true
-    })
+  return (
+    <div style={{ maxWidth: 900, margin: 'auto', padding: 24 }}>
+      <Link href="/ ">← Back to Patients</Link>
+      <Title level={3} style={{ marginTop: 16 }}>
+        Treatment History
+      </Title>
 
-    if (isLoading) return <p className="p-4">Loading...</p>
+      {/* Filters Section */}
+      <Card style={{ marginBottom: 24 }}>
+        <Space wrap>
+          <Select
+            allowClear
+            placeholder="Filter by type"
+            style={{ width: 180 }}
+            value={typeFilter}
+            onChange={(value) => setTypeFilter(value)}
+            options={[
+              { label: 'Cleaning', value: 'Cleaning' },
+              { label: 'Filling', value: 'Filling' },
+              { label: 'Root Canal', value: 'Root Canal' },
+            ]}
+          />
 
+          <DatePicker
+            placeholder="Filter by date"
+            onChange={(date) =>
+              setDateFilter(date ? date.format('YYYY-MM-DD') : "")
+            }
+          />
 
-    return (
-        <div className="p-6 max-w-xl mx-auto">
-            <Link href="/" className="text-blue-500">Back</Link>
-            <h1 className="text-2xl font-bold my-4">Treatment History</h1>
+          <Button
+            onClick={() => {
+              setTypeFilter("")
+              setDateFilter("")
+            }}
+          >
+            Clear Filters
+          </Button>
+        </Space>
+      </Card>
 
-            {/* Filter Section */}
-
-            <div className="filters">
-                <select
-                    value={typeFilter}
-                    onChange={(e) => setTypeFilter(e.target.value)}
-                >
-                    <option value="">All Types</option>
-                    <option value="Cleaning">Cleaning</option>
-                    <option value="Filling">Filling</option>
-                    <option value="Root Canal">Root Canal</option>
-                </select>
-
-                {/*  Date Filter Section */}
-
-                <input
-                type="date"
-                    value={dateFilter}
-                    onChange={(e) => setDateFilter(e.target.value)}
-                />
-
-                {/*  Reset Filter */}
-
-                <button onClick={() => {
-                    setTypeFilter('')
-                    setDateFilter('')
-                }}
-                >
-                    Clear Filters
-                </button>
-
-            </div>
-            {filteredTreatments?.length === 0 && <p>No treatments found..</p>}
-            <div className="table-container">
-                <table style={{ width: "100%", borderCollapse: "collapse", border: "1px solid #ccc" }}>
-                    <thead style={{ backgroundColor: "#f5f5f5",color:"blue",borderBottom: "1px solid #ccc"  }}>
-                        <tr>
-                            <th><strong>T_type</strong></th>
-                            <th><strong>T_date</strong></th>
-                            <th><strong>T_cost</strong></th>
-                        </tr>
-                    </thead>
-                    <tbody style={{ textAlign: "center" }}>
-
-                        {filteredTreatments?.map((t) => (
-                            <tr key={t.id} style={{ borderBottom: "1px solid #ccc" }}>
-                                <td> {t.type}</td>
-                                <td>{t.date}</td>
-                                <td>{t.cost}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    )
+      {/* Treatments Table */}
+      <Card>
+        {isLoading ? (
+          <div style={{ textAlign: 'center', padding: 40 }}>
+            <Spin size="large" />
+          </div>
+        ) : filteredTreatments.length === 0 ? (
+          <Empty description="No treatments found" />
+        ) : (
+          <Table
+            columns={columns}
+            dataSource={filteredTreatments}
+            rowKey="id"
+            pagination={{ pageSize: 5 }}
+          />
+        )}
+      </Card>
+    </div>
+  )
 }
+
+
+ 
+     
